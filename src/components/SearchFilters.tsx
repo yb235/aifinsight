@@ -57,17 +57,6 @@ export const SearchFilters = ({ onSearch, onFilterChange }: SearchFiltersProps) 
         </div>
 
         <div className="flex gap-2">
-          <Select>
-            <SelectTrigger className="w-32">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="processed">Processed</SelectItem>
-              <SelectItem value="processing">Processing</SelectItem>
-            </SelectContent>
-          </Select>
-
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" className="w-32">
