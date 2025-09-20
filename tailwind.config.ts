@@ -47,6 +47,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        stock: {
+          primary: "hsl(var(--stock-primary))",
+          secondary: "hsl(var(--stock-secondary))",
+        },
+        industry: {
+          primary: "hsl(var(--industry-primary))",
+          secondary: "hsl(var(--industry-secondary))",
+        },
+        contact: {
+          primary: "hsl(var(--contact-primary))",
+          secondary: "hsl(var(--contact-secondary))",
+        },
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
+        error: "hsl(var(--error))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
