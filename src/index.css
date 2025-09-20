@@ -8,51 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Claude AI Brand Colors */
+    /* Custom Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 14 55% 49%; /* Crail */
+    --foreground: 15 64% 60%; /* #da7756 */
     --title-black: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 14 55% 49%;
+    --card-foreground: 15 64% 60%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 14 55% 49%;
+    --popover-foreground: 15 64% 60%;
 
-    --primary: 14 55% 49%; /* Crail #C15F3C */
+    --primary: 15 64% 60%; /* #da7756 */
     --primary-foreground: 0 0% 100%;
 
     --secondary: 44 17% 95%; /* Pampas #F4F3EE */
-    --secondary-foreground: 14 55% 49%;
+    --secondary-foreground: 15 64% 60%;
 
     --muted: 44 17% 95%; /* Pampas */
     --muted-foreground: 32 7% 67%; /* Cloudy #B1ADA1 */
 
     --accent: 44 17% 95%; /* Pampas */
-    --accent-foreground: 14 55% 49%;
+    --accent-foreground: 15 64% 60%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 32 7% 67%; /* Cloudy */
     --input: 44 17% 95%; /* Pampas */
-    --ring: 14 55% 49%; /* Crail */
+    --ring: 15 64% 60%; /* #da7756 */
 
-    /* Claude Brand Data Colors */
-    --stock-primary: 14 55% 49%; /* Crail */
-    --stock-secondary: 14 60% 55%;
+    /* Brand Data Colors */
+    --stock-primary: 15 64% 60%; /* #da7756 */
+    --stock-secondary: 15 70% 65%;
     --industry-primary: 32 7% 67%; /* Cloudy */
     --industry-secondary: 32 10% 70%;
-    --contact-primary: 14 45% 40%;
-    --contact-secondary: 14 50% 45%;
+    --contact-primary: 15 55% 50%;
+    --contact-secondary: 15 60% 55%;
     
     /* Status Colors */
-    --success: 14 55% 49%;
-    --warning: 14 55% 49%;
+    --success: 15 64% 60%;
+    --warning: 15 64% 60%;
     --error: 0 84% 60%;
     
     /* Shadows - Clean and minimal */
-    --shadow-glow: 0 0 20px hsl(14 55% 49% / 0.15);
+    --shadow-glow: 0 0 20px hsl(15 64% 60% / 0.15);
     --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.05);
     --shadow-elevated: 0 8px 40px hsl(0 0% 0% / 0.1);
 
