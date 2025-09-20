@@ -4,7 +4,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Send, Bot, Key, AlertCircle } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Send, Bot, Key, AlertCircle, ChevronDown } from 'lucide-react';
 import { mockMeetings } from '@/data/mockMeetings';
 import { mockDocuments } from '@/data/mockDocuments';
 import { mockNews } from '@/data/mockNews';
@@ -13,9 +14,37 @@ interface AIQueryBoxProps {
   className?: string;
 }
 
+const API_PROVIDERS = {
+  groq: {
+    name: 'Groq',
+    endpoint: 'https://api.groq.com/openai/v1/chat/completions',
+    model: 'llama3-8b-8192',
+    defaultKey: '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',
+    keyUrl: 'https://console.groq.com/keys',
+    description: 'Fast and free (100 requests/hour)',
+  },
+  openai: {
+    name: 'OpenAI',
+    endpoint: 'https://api.openai.com/v1/chat/completions',
+    model: 'gpt-4o-mini',
+    defaultKey: '',
+    keyUrl: 'https://platform.openai.com/api-keys',
+    description: 'GPT-4o-mini (Free tier: $5/month)',
+  },
+  perplexity: {
+    name: 'Perplexity',
+    endpoint: 'https://api.perplexity.ai/chat/completions',
+    model: 'llama-3.1-sonar-small-128k-online',
+    defaultKey: '',
+    keyUrl: 'https://perplexity.ai',
+    description: 'Online search capabilities',
+  }
+};
+
 export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
   const [query, setQuery] = useState('');
-  const [apiKey, setApiKey] = useState('');
+  const [provider, setProvider] = useState<keyof typeof API_PROVIDERS>('groq');
+  const [apiKey, setApiKey] = useState(API_PROVIDERS.groq.defaultKey);
   const [response, setResponse] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showApiKey, setShowApiKey] = useState(false);
@@ -58,6 +87,12 @@ export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
     };
   };
 
+  const handleProviderChange = (newProvider: keyof typeof API_PROVIDERS) => {
+    setProvider(newProvider);
+    setApiKey(API_PROVIDERS[newProvider].defaultKey);
+    setShowApiKey(!API_PROVIDERS[newProvider].defaultKey);
+  };
+
   const handleQuery = async () => {
     if (!query.trim()) return;
     if (!apiKey.trim()) {
@@ -85,32 +120,39 @@ ${context.news.map(n => `- ${n.title} (${n.source}): ${n.excerpt} | Category: ${
 Answer the user's question based on this data. Be specific and reference the relevant meetings, documents, or news items.
       `;
 
-      const response = await fetch('https://api.perplexity.ai/chat/completions', {
+      const currentProvider = API_PROVIDERS[provider];
+      const requestBody: any = {
+        model: currentProvider.model,
+        messages: [
+          {
+            role: 'system',
+            content: contextString
+          },
+          {
+            role: 'user',
+            content: query
+          }
+        ],
+        temperature: 0.2,
+        max_tokens: 1000,
+      };
+
+      // Add provider-specific parameters
+      if (provider === 'perplexity') {
+        requestBody.top_p = 0.9;
+        requestBody.return_images = false;
+        requestBody.return_related_questions = false;
+        requestBody.frequency_penalty = 1;
+        requestBody.presence_penalty = 0;
+      }
+
+      const response = await fetch(currentProvider.endpoint, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          model: 'llama-3.1-sonar-small-128k-online',
-          messages: [
-            {
-              role: 'system',
-              content: contextString
-            },
-            {
-              role: 'user',
-              content: query
-            }
-          ],
-          temperature: 0.2,
-          top_p: 0.9,
-          max_tokens: 1000,
-          return_images: false,
-          return_related_questions: false,
-          frequency_penalty: 1,
-          presence_penalty: 0
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -143,22 +185,46 @@ Answer the user's question based on this data. Be specific and reference the rel
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Bot className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm font-medium">AI Provider</span>
+          </div>
+          <Select value={provider} onValueChange={handleProviderChange}>
+            <SelectTrigger className="bg-background/50">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {Object.entries(API_PROVIDERS).map(([key, config]) => (
+                <SelectItem key={key} value={key}>
+                  <div className="flex items-center justify-between w-full">
+                    <span>{config.name}</span>
+                    <Badge variant="secondary" className="ml-2 text-xs">
+                      {config.description}
+                    </Badge>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         {!apiKey && (
           <div className="flex items-center gap-2 p-3 bg-warning/10 border border-warning/20 rounded-lg">
             <AlertCircle className="h-4 w-4 text-warning" />
-            <span className="text-sm text-warning">Perplexity API key required to use AI assistant</span>
+            <span className="text-sm text-warning">{API_PROVIDERS[provider].name} API key required</span>
           </div>
         )}
         
-        {showApiKey && (
+        {(showApiKey || !API_PROVIDERS[provider].defaultKey) && (
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Key className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-medium">Perplexity API Key</span>
+              <span className="text-sm font-medium">{API_PROVIDERS[provider].name} API Key</span>
             </div>
             <Input
               type="password"
-              placeholder="Enter your Perplexity API key..."
+              placeholder={`Enter your ${API_PROVIDERS[provider].name} API key...`}
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               className="bg-background/50"
@@ -166,12 +232,12 @@ Answer the user's question based on this data. Be specific and reference the rel
             <p className="text-xs text-muted-foreground">
               Get your API key from{' '}
               <a 
-                href="https://perplexity.ai" 
+                href={API_PROVIDERS[provider].keyUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
               >
-                perplexity.ai
+                {API_PROVIDERS[provider].name}
               </a>
             </p>
           </div>
