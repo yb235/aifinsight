@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Send, Bot, Key, AlertCircle, ChevronDown } from 'lucide-react';
+import { Send, Bot, Key, AlertCircle, Sparkles } from 'lucide-react';
 import { mockMeetings } from '@/data/mockMeetings';
 import { mockDocuments } from '@/data/mockDocuments';
 import { mockNews } from '@/data/mockNews';
@@ -18,7 +18,7 @@ const API_PROVIDERS = {
   groq: {
     name: 'Groq',
     endpoint: 'https://api.groq.com/openai/v1/chat/completions',
-    model: 'llama3-8b-8192',
+    model: 'llama-3.1-70b-versatile',
     defaultKey: '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',
     keyUrl: 'https://console.groq.com/keys',
     description: 'Fast and free (100 requests/hour)',
@@ -42,11 +42,10 @@ const API_PROVIDERS = {
 };
 
 export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
+  const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [provider, setProvider] = useState<keyof typeof API_PROVIDERS>('groq');
   const [apiKey, setApiKey] = useState(API_PROVIDERS.groq.defaultKey);
-  const [response, setResponse] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [showApiKey, setShowApiKey] = useState(false);
 
   const prepareContext = () => {
@@ -93,19 +92,15 @@ export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
     setShowApiKey(!API_PROVIDERS[newProvider].defaultKey);
   };
 
-  const handleQuery = async () => {
+  const handleQuery = () => {
     if (!query.trim()) return;
     if (!apiKey.trim()) {
       setShowApiKey(true);
       return;
     }
 
-    setIsLoading(true);
-    setResponse('');
-
-    try {
-      const context = prepareContext();
-      const contextString = `
+    const context = prepareContext();
+    const contextString = `
 Context: You are analyzing financial meetings, documents, and news. Here's the available data:
 
 MEETINGS (${context.meetings.length} total):
@@ -120,57 +115,19 @@ ${context.news.map(n => `- ${n.title} (${n.source}): ${n.excerpt} | Category: ${
 Answer the user's question based on this data. Be specific and reference the relevant meetings, documents, or news items.
       `;
 
-      const currentProvider = API_PROVIDERS[provider];
-      const requestBody: any = {
-        model: currentProvider.model,
-        messages: [
-          {
-            role: 'system',
-            content: contextString
-          },
-          {
-            role: 'user',
-            content: query
-          }
-        ],
-        temperature: 0.2,
-        max_tokens: 1000,
-      };
-
-      // Add provider-specific parameters
-      if (provider === 'perplexity') {
-        requestBody.top_p = 0.9;
-        requestBody.return_images = false;
-        requestBody.return_related_questions = false;
-        requestBody.frequency_penalty = 1;
-        requestBody.presence_penalty = 0;
+    navigate('/chat', {
+      state: {
+        query,
+        provider,
+        apiKey,
+        context: contextString
       }
-
-      const response = await fetch(currentProvider.endpoint, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setResponse(data.choices[0]?.message?.content || 'No response received');
-    } catch (error) {
-      console.error('Query error:', error);
-      setResponse(`Error: ${error instanceof Error ? error.message : 'Failed to process query'}`);
-    } finally {
-      setIsLoading(false);
-    }
+    });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleQuery();
     }
   };
@@ -246,7 +203,7 @@ Answer the user's question based on this data. Be specific and reference the rel
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">Ask a question</span>
-            <span className="text-xs text-muted-foreground">Cmd/Ctrl + Enter to send</span>
+            <span className="text-xs text-muted-foreground">Enter to start chat</span>
           </div>
           <div className="flex gap-2">
             <Input
@@ -258,29 +215,15 @@ Answer the user's question based on this data. Be specific and reference the rel
             />
             <Button 
               onClick={handleQuery} 
-              disabled={isLoading || !query.trim()}
-              size="sm"
+              disabled={!query.trim()}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
             >
-              {isLoading ? (
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-              ) : (
-                <Send className="h-4 w-4" />
-              )}
+              <Sparkles className="h-4 w-4" />
+              Start Chat
             </Button>
           </div>
         </div>
 
-        {response && (
-          <div className="space-y-2">
-            <div className="flex items-center gap-2">
-              <Bot className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium">AI Response</span>
-            </div>
-            <div className="p-4 bg-background/50 border border-border/50 rounded-lg">
-              <div className="text-sm whitespace-pre-wrap">{response}</div>
-            </div>
-          </div>
-        )}
 
         <div className="flex flex-wrap gap-2">
           <Badge variant="outline" className="text-xs cursor-pointer hover:bg-muted/50" onClick={() => setQuery("What are the key insights from my recent meetings?")}>
