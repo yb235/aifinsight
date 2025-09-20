@@ -9,6 +9,20 @@ export interface Participant {
   company?: string;
 }
 
+export interface TranscriptSegment {
+  id: string;
+  speaker: string;
+  timestamp: string;
+  text: string;
+}
+
+export interface MeetingOverview {
+  summary: string;
+  keyTopics: string[];
+  actionItems: string[];
+  conclusions: string[];
+}
+
 export interface Meeting {
   id: string;
   title: string;
@@ -22,4 +36,6 @@ export interface Meeting {
   summary?: string;
   stockTickers?: string[];
   industries?: string[];
+  transcript?: TranscriptSegment[];
+  overview?: MeetingOverview;
 }

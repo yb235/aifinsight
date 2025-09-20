@@ -1,4 +1,4 @@
-import { Meeting } from '@/types/Meeting';
+import { Meeting, TranscriptSegment, MeetingOverview } from '@/types/Meeting';
 
 export const mockMeetings: Meeting[] = [
   {
@@ -25,7 +25,45 @@ export const mockMeetings: Meeting[] = [
     ],
     status: 'processed',
     stockTickers: ['NVDA', 'INTC'],
-    industries: ['Semiconductors', 'Technology']
+    industries: ['Semiconductors', 'Technology'],
+    transcript: [
+      {
+        id: '1',
+        speaker: 'Sarah',
+        timestamp: '00:02:15',
+        text: 'Welcome everyone to our NVIDIA Q3 earnings discussion. The numbers came in significantly above expectations.'
+      },
+      {
+        id: '2',
+        speaker: 'James',
+        timestamp: '00:02:45',
+        text: 'Absolutely, Sarah. The data center revenue growth of 206% year-over-year is unprecedented. This is driven entirely by AI demand.'
+      },
+      {
+        id: '3',
+        speaker: 'You',
+        timestamp: '00:03:12',
+        text: 'What are your thoughts on the sustainability of this growth? Can NVIDIA maintain this momentum?'
+      },
+      {
+        id: '4',
+        speaker: 'Sarah',
+        timestamp: '00:03:35',
+        text: 'The backlog is substantial. Fortune 500 companies are just starting their AI infrastructure buildouts. I see at least 18 months of strong demand.'
+      },
+      {
+        id: '5',
+        speaker: 'James',
+        timestamp: '00:04:20',
+        text: 'However, we should watch Intel closely. They are losing market share rapidly in data centers to AMD and ARM-based solutions.'
+      }
+    ],
+    overview: {
+      summary: 'In-depth analysis of NVIDIA\'s Q3 earnings performance, focusing on exceptional data center growth driven by AI demand. Discussion covered competitive dynamics with Intel and AMD, gaming segment recovery prospects, and supply chain improvements.',
+      keyTopics: ['AI Infrastructure Demand', 'Data Center Revenue Growth', 'Gaming Recovery', 'Supply Chain Optimization'],
+      actionItems: ['Monitor Intel market share trends', 'Track gaming segment Q4 performance', 'Assess supply chain constraint improvements'],
+      conclusions: ['NVIDIA positioned for continued AI-driven growth', 'Gaming showing early recovery signs', 'Intel facing structural challenges in data center market']
+    }
   },
   {
     id: '2',

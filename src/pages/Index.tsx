@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { SearchFilters } from '@/components/SearchFilters';
 import { MeetingCard } from '@/components/MeetingCard';
@@ -11,6 +12,7 @@ import { Plus, Mic, Upload, Zap } from 'lucide-react';
 import heroImage from '@/assets/dashboard-hero.jpg';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState({ filters: [], dateRange: {} });
 
@@ -29,8 +31,7 @@ const Index = () => {
   }, [searchQuery, filters]);
 
   const handleMeetingClick = (meetingId: string) => {
-    console.log('Opening meeting:', meetingId);
-    // This would navigate to a detailed meeting view
+    navigate(`/meeting/${meetingId}`);
   };
 
   return (
