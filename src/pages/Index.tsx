@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Header } from '@/components/Header';
 import { SearchFilters } from '@/components/SearchFilters';
+import { AIQueryBox } from '@/components/AIQueryBox';
 import { MeetingCard } from '@/components/MeetingCard';
 import { DocumentCard } from '@/components/DocumentCard';
 import { NewsCard } from '@/components/NewsCard';
@@ -38,6 +40,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 py-12">
@@ -74,6 +77,8 @@ const Index = () => {
       </section>
 
       <div className="container mx-auto px-6 py-12 space-y-8">
+        <AIQueryBox />
+        
         <SearchFilters 
           onSearch={setSearchQuery}
           onFilterChange={setFilters} 
