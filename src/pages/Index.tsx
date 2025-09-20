@@ -6,7 +6,7 @@ import { mockMeetings } from '@/data/mockMeetings';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Mic, Upload, Zap } from 'lucide-react';
+import { Plus, Mic, Upload, FileText } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -50,82 +50,56 @@ const Index = () => {
                 <Upload className="h-5 w-5 mr-2" />
                 Upload Meeting
               </Button>
+              <Button variant="outline" size="lg">
+                <FileText className="h-5 w-5 mr-2" />
+                Attach Document
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
       <div className="container mx-auto px-6 py-12 space-y-8">
+        <SearchFilters 
+          onSearch={setSearchQuery}
+          onFilterChange={setFilters} 
+        />
 
-        <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-3 space-y-6">
-            <SearchFilters 
-              onSearch={setSearchQuery}
-              onFilterChange={setFilters} 
-            />
-
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold">
-                Recent Meetings 
-                <Badge variant="secondary" className="ml-2">
-                  {filteredMeetings.length}
-                </Badge>
-              </h2>
-              <Button>
-                <Plus className="h-4 w-4 mr-2" />
-                New Meeting
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {filteredMeetings.map((meeting) => (
-                <MeetingCard
-                  key={meeting.id}
-                  meeting={meeting}
-                  onClick={() => handleMeetingClick(meeting.id)}
-                />
-              ))}
-            </div>
-
-            {filteredMeetings.length === 0 && (
-              <Card className="border-border/50 bg-card/30">
-                <CardContent className="py-12 text-center">
-                  <div className="space-y-3">
-                    <div className="text-muted-foreground">No meetings found matching your criteria</div>
-                    <Button variant="outline" onClick={() => {setSearchQuery(''); setFilters({ filters: [], dateRange: {} });}}>
-                      Clear Filters
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-
-          <div className="space-y-6">
-            <Card className="border-border/50 bg-card/30 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-primary" />
-                  Quick Actions
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-start">
-                  <Mic className="h-4 w-4 mr-2" />
-                  Record New Meeting
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Upload className="h-4 w-4 mr-2" />
-                  Upload Audio File
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Manual Entry
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+        <div className="flex items-center justify-between">
+          <h2 className="text-2xl font-semibold">
+            Recent Meetings 
+            <Badge variant="secondary" className="ml-2">
+              {filteredMeetings.length}
+            </Badge>
+          </h2>
+          <Button>
+            <Plus className="h-4 w-4 mr-2" />
+            New Meeting
+          </Button>
         </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {filteredMeetings.map((meeting) => (
+            <MeetingCard
+              key={meeting.id}
+              meeting={meeting}
+              onClick={() => handleMeetingClick(meeting.id)}
+            />
+          ))}
+        </div>
+
+        {filteredMeetings.length === 0 && (
+          <Card className="border-border/50 bg-card/30">
+            <CardContent className="py-12 text-center">
+              <div className="space-y-3">
+                <div className="text-muted-foreground">No meetings found matching your criteria</div>
+                <Button variant="outline" onClick={() => {setSearchQuery(''); setFilters({ filters: [], dateRange: {} });}}>
+                  Clear Filters
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
