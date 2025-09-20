@@ -18,7 +18,7 @@ const API_PROVIDERS = {
   groq: {
     name: 'Groq',
     endpoint: 'https://api.groq.com/openai/v1/chat/completions',
-    model: 'llama-3.1-70b-versatile',
+    model: 'llama-3.1-70b-instant',
     defaultKey: '',
     keyUrl: 'https://console.groq.com/keys',
     description: 'Fast and free (100 requests/hour)',

@@ -33,7 +33,7 @@ const Chat = () => {
   const API_PROVIDERS = {
     groq: {
       endpoint: 'https://api.groq.com/openai/v1/chat/completions',
-      model: 'llama-3.1-70b-versatile',
+      model: 'llama-3.1-70b-instant',
       defaultKey: '',
       keyUrl: 'https://console.groq.com/keys'
     },
