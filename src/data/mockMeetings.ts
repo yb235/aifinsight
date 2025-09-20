@@ -7,8 +7,8 @@ export const mockMeetings: Meeting[] = [
     date: '2024-09-18T14:00:00Z',
     duration: 45,
     participants: [
-      { name: 'Sarah Chen', role: 'Senior Analyst', company: 'Goldman Sachs' },
-      { name: 'Michael Rodriguez', role: 'Portfolio Manager', company: 'BlackRock' },
+      { name: 'Sarah', role: 'Senior Analyst', company: 'Goldman Sachs' },
+      { name: 'James', role: 'Portfolio Manager', company: 'BlackRock' },
       { name: 'You', role: 'Investor' }
     ],
     tags: [
@@ -32,8 +32,8 @@ export const mockMeetings: Meeting[] = [
     date: '2024-09-17T10:30:00Z',
     duration: 60,
     participants: [
-      { name: 'Dr. Emily Watson', role: 'Healthcare Analyst', company: 'JP Morgan' },
-      { name: 'Robert Kim', role: 'Biotech Specialist', company: 'Fidelity' },
+      { name: 'Soheil', role: 'Healthcare Analyst', company: 'JP Morgan' },
+      { name: 'Sarah', role: 'Biotech Specialist', company: 'Fidelity' },
       { name: 'Anna Thompson', role: 'Regulatory Expert' }
     ],
     tags: [
@@ -56,8 +56,8 @@ export const mockMeetings: Meeting[] = [
     date: '2024-09-16T16:15:00Z',
     duration: 35,
     participants: [
-      { name: 'James Liu', role: 'Auto Analyst', company: 'Morgan Stanley' },
-      { name: 'Lisa Park', role: 'EV Specialist', company: 'ARK Invest' }
+      { name: 'James', role: 'Auto Analyst', company: 'Morgan Stanley' },
+      { name: 'Soheil', role: 'EV Specialist', company: 'ARK Invest' }
     ],
     tags: [
       { name: 'TSLA', category: 'stock' },
@@ -80,9 +80,9 @@ export const mockMeetings: Meeting[] = [
     date: '2024-09-15T13:45:00Z',
     duration: 50,
     participants: [
-      { name: 'David Foster', role: 'Chief Economist', company: 'Deutsche Bank' },
-      { name: 'Maria Gonzalez', role: 'Fixed Income Strategist', company: 'Vanguard' },
-      { name: 'Tom Wilson', role: 'Macro Analyst', company: 'Bridgewater' }
+      { name: 'Soheil', role: 'Chief Economist', company: 'Deutsche Bank' },
+      { name: 'Sarah', role: 'Fixed Income Strategist', company: 'Vanguard' },
+      { name: 'James', role: 'Macro Analyst', company: 'Bridgewater' }
     ],
     tags: [
       { name: 'Fed Policy', category: 'topic' },
@@ -104,8 +104,8 @@ export const mockMeetings: Meeting[] = [
     date: '2024-09-14T11:20:00Z',
     duration: 40,
     participants: [
-      { name: 'Ahmed Hassan', role: 'Energy Analyst', company: 'Goldman Sachs' },
-      { name: 'Jennifer Smith', role: 'Commodities Trader', company: 'Shell Trading' }
+      { name: 'Sarah', role: 'Energy Analyst', company: 'Goldman Sachs' },
+      { name: 'Soheil', role: 'Commodities Trader', company: 'Shell Trading' }
     ],
     tags: [
       { name: 'Energy', category: 'industry' },
