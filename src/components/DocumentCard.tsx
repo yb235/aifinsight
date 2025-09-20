@@ -96,13 +96,9 @@ export const DocumentCard = ({ document, onClick }: DocumentCardProps) => {
         </p>
 
         <div className="flex items-center justify-between pt-2 border-t border-border/30">
-          <Badge variant="outline" className={`text-xs ${
-            document.status === 'processed' ? 'text-green-600 border-green-200' :
-            document.status === 'processing' ? 'text-primary border-primary/20' :
-            'text-muted-foreground'
-          }`}>
-            {document.status}
-          </Badge>
+          <div className="text-xs text-muted-foreground">
+            Uploaded {new Date(document.uploadDate).toLocaleDateString()}
+          </div>
         </div>
       </CardContent>
     </Card>

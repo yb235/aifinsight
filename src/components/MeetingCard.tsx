@@ -107,9 +107,6 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
             <FileText className="h-4 w-4" />
             <span>{meeting.duration} min recording</span>
           </div>
-          <Badge variant="outline" className="text-xs">
-            {meeting.status}
-          </Badge>
         </div>
       </CardContent>
     </Card>
