@@ -56,10 +56,10 @@ export const NewsCard = ({ newsItem, onClick }: NewsCardProps) => {
           
           <div className="flex-1 space-y-2">
             <div className="flex items-start justify-between">
-              <h3 className="font-bold text-lg text-title-black font-styrene leading-tight">
+              <h3 className="font-bold text-lg text-title-black font-styrene leading-tight pr-2">
                 {newsItem.title}
               </h3>
-              <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">
+              <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
                 <ExternalLink className="h-4 w-4" />
               </Button>
             </div>
@@ -78,11 +78,11 @@ export const NewsCard = ({ newsItem, onClick }: NewsCardProps) => {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed">
+        <p className="text-sm text-muted-foreground leading-relaxed text-justify">
           {newsItem.excerpt}
         </p>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 pt-2">
           {newsItem.tags.map((tag, index) => (
             <Badge key={index} variant="secondary" className="text-xs">
               {tag}
