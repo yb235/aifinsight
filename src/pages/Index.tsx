@@ -3,13 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { SearchFilters } from '@/components/SearchFilters';
 import { MeetingCard } from '@/components/MeetingCard';
-import { StatsOverview } from '@/components/StatsOverview';
 import { mockMeetings } from '@/data/mockMeetings';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Mic, Upload, Zap } from 'lucide-react';
-import heroImage from '@/assets/dashboard-hero.jpg';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -39,52 +37,28 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-secondary/20">
-        <div className="absolute inset-0 bg-[url('/src/assets/dashboard-hero.jpg')] bg-cover bg-center opacity-5" />
+      <section className="relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h1 className="text-4xl lg:text-6xl font-bold">
-              <span className="bg-gradient-to-r from-primary via-stock-secondary to-industry-primary bg-clip-text text-transparent">
-                Meeting Intelligence
-              </span>
-              <br />
-              <span className="text-foreground">Dashboard</span>
+            <h1 className="text-4xl lg:text-6xl font-bold text-primary">
+              FinSight
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Capture, analyze, and extract insights from every meeting. Transform conversations into actionable investment intelligence.
-            </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button variant="hero" size="lg">
+              <Button variant="default" size="lg">
                 <Mic className="h-5 w-5 mr-2" />
                 Start Recording
               </Button>
-              <Button variant="outline" size="lg" className="border-border/50 hover:bg-secondary/50">
+              <Button variant="outline" size="lg">
                 <Upload className="h-5 w-5 mr-2" />
                 Upload Meeting
               </Button>
-            </div>
-
-            <div className="flex justify-center gap-8 pt-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">100%</div>
-                <div className="text-sm text-muted-foreground">Automated</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-industry-primary">24/7</div>
-                <div className="text-sm text-muted-foreground">Processing</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-contact-primary">99.9%</div>
-                <div className="text-sm text-muted-foreground">Accuracy</div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
       <div className="container mx-auto px-6 py-12 space-y-8">
-        <StatsOverview />
 
         <div className="grid lg:grid-cols-4 gap-8">
           <div className="lg:col-span-3 space-y-6">
@@ -162,15 +136,15 @@ const Index = () => {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Technology</span>
-                    <Badge variant="secondary" className="bg-stock-primary/10 text-stock-primary">42</Badge>
+                    <Badge variant="secondary">42</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Healthcare</span>
-                    <Badge variant="secondary" className="bg-industry-primary/10 text-industry-primary">28</Badge>
+                    <Badge variant="secondary">28</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Energy</span>
-                    <Badge variant="secondary" className="bg-contact-primary/10 text-contact-primary">19</Badge>
+                    <Badge variant="secondary">19</Badge>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium">Financial Services</span>
@@ -188,7 +162,7 @@ const Index = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span>Queue:</span>
-                    <span className="text-warning">2 pending</span>
+                    <span className="text-primary">2 pending</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Processing:</span>
@@ -196,7 +170,7 @@ const Index = () => {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Completed:</span>
-                    <span className="text-success">244 total</span>
+                    <span className="text-primary">244 total</span>
                   </div>
                 </div>
               </CardContent>

@@ -11,8 +11,8 @@ export const Header = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <TrendingUp className="h-8 w-8 text-primary" />
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-stock-secondary bg-clip-text text-transparent">
-                Meeting Intelligence
+              <h1 className="text-2xl font-bold text-primary">
+                FinSight
               </h1>
             </div>
             <Badge variant="secondary" className="hidden md:flex">
