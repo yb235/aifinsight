@@ -2,11 +2,14 @@ import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SearchFilters } from '@/components/SearchFilters';
 import { MeetingCard } from '@/components/MeetingCard';
+import { DocumentCard } from '@/components/DocumentCard';
 import { mockMeetings } from '@/data/mockMeetings';
+import { mockDocuments } from '@/data/mockDocuments';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Mic, Upload, FileText, TrendingUp } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Plus, Mic, Upload, FileText, TrendingUp, Download, Eye, Calendar } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -74,41 +77,67 @@ const Index = () => {
           onFilterChange={setFilters} 
         />
 
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-title-black font-styrene">
-            Recent Meetings 
-            <Badge variant="secondary" className="ml-2">
-              {filteredMeetings.length}
-            </Badge>
-          </h2>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            New Meeting
-          </Button>
-        </div>
+        <Tabs defaultValue="meetings" className="space-y-6">
+          <div className="flex items-center justify-between">
+            <TabsList className="grid w-auto grid-cols-2">
+              <TabsTrigger value="meetings" className="flex items-center gap-2">
+                <TrendingUp className="h-4 w-4" />
+                Recent Meetings
+                <Badge variant="secondary" className="ml-1">
+                  {filteredMeetings.length}
+                </Badge>
+              </TabsTrigger>
+              <TabsTrigger value="documents" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Documents
+                <Badge variant="secondary" className="ml-1">
+                  3
+                </Badge>
+              </TabsTrigger>
+            </TabsList>
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              New Meeting
+            </Button>
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {filteredMeetings.map((meeting) => (
-            <MeetingCard
-              key={meeting.id}
-              meeting={meeting}
-              onClick={() => handleMeetingClick(meeting.id)}
-            />
-          ))}
-        </div>
+          <TabsContent value="meetings" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {filteredMeetings.map((meeting) => (
+                <MeetingCard
+                  key={meeting.id}
+                  meeting={meeting}
+                  onClick={() => handleMeetingClick(meeting.id)}
+                />
+              ))}
+            </div>
 
-        {filteredMeetings.length === 0 && (
-          <Card className="border-border/50 bg-card/30">
-            <CardContent className="py-12 text-center">
-              <div className="space-y-3">
-                <div className="text-muted-foreground">No meetings found matching your criteria</div>
-                <Button variant="outline" onClick={() => {setSearchQuery(''); setFilters({ filters: [], dateRange: {} });}}>
-                  Clear Filters
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+            {filteredMeetings.length === 0 && (
+              <Card className="border-border/50 bg-card/30">
+                <CardContent className="py-12 text-center">
+                  <div className="space-y-3">
+                    <div className="text-muted-foreground">No meetings found matching your criteria</div>
+                    <Button variant="outline" onClick={() => {setSearchQuery(''); setFilters({ filters: [], dateRange: {} });}}>
+                      Clear Filters
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </TabsContent>
+
+          <TabsContent value="documents" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {mockDocuments.map((document) => (
+                <DocumentCard
+                  key={document.id}
+                  document={document}
+                  onClick={() => console.log('Document clicked:', document.id)}
+                />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
