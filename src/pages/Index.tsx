@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { SearchFilters } from '@/components/SearchFilters';
 import { MeetingCard } from '@/components/MeetingCard';
 import { DocumentCard } from '@/components/DocumentCard';
+import { NewsCard } from '@/components/NewsCard';
 import { mockMeetings } from '@/data/mockMeetings';
 import { mockDocuments } from '@/data/mockDocuments';
+import { mockNews } from '@/data/mockNews';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, Mic, Upload, FileText, TrendingUp, Download, Eye, Calendar } from 'lucide-react';
+import { Plus, Mic, Upload, FileText, TrendingUp, Download, Eye, Calendar, Newspaper } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -79,7 +81,7 @@ const Index = () => {
 
         <Tabs defaultValue="meetings" className="space-y-6">
           <div className="flex items-center justify-between">
-            <TabsList className="grid w-auto grid-cols-2">
+            <TabsList className="grid w-auto grid-cols-3">
               <TabsTrigger value="meetings" className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
                 Recent Meetings
@@ -92,6 +94,13 @@ const Index = () => {
                 Documents
                 <Badge variant="secondary" className="ml-1">
                   3
+                </Badge>
+              </TabsTrigger>
+              <TabsTrigger value="news" className="flex items-center gap-2">
+                <Newspaper className="h-4 w-4" />
+                News
+                <Badge variant="secondary" className="ml-1">
+                  {mockNews.length}
                 </Badge>
               </TabsTrigger>
             </TabsList>
@@ -133,6 +142,18 @@ const Index = () => {
                   key={document.id}
                   document={document}
                   onClick={() => console.log('Document clicked:', document.id)}
+                />
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="news" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {mockNews.map((newsItem) => (
+                <NewsCard
+                  key={newsItem.id}
+                  newsItem={newsItem}
+                  onClick={() => console.log('News clicked:', newsItem.id)}
                 />
               ))}
             </div>

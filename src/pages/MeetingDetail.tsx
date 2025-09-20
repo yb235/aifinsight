@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
+import { RelatedContent } from '@/components/RelatedContent';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -246,6 +247,15 @@ const MeetingDetail = () => {
             </Card>
           </TabsContent>
         </Tabs>
+
+        {/* Related Content Section */}
+        <RelatedContent
+          currentItemId={meeting.id}
+          currentItemType="meeting"
+          tags={meeting.tags.map(tag => tag.name)}
+          industries={meeting.industries}
+          stockTickers={meeting.stockTickers}
+        />
       </div>
     </div>
   );
