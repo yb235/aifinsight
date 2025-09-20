@@ -110,7 +110,7 @@ const Index = () => {
             </TabsList>
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              New Meeting
+              Join Meeting
             </Button>
           </div>
 
