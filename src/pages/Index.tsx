@@ -124,28 +124,6 @@ const Index = () => {
                 </Button>
               </CardContent>
             </Card>
-
-            <Card className="border-border/50 bg-card/30 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>Processing Status</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between text-sm">
-                    <span>Queue:</span>
-                    <span className="text-primary">2 pending</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Processing:</span>
-                    <span className="text-primary">1 active</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>Completed:</span>
-                    <span className="text-primary">244 total</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </div>
