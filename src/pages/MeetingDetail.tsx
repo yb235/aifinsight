@@ -79,7 +79,6 @@ const MeetingDetail = () => {
                 <FileText className="h-4 w-4" />
                 <span>{meeting.duration} min recording</span>
               </div>
-              <Badge variant="outline">{meeting.status}</Badge>
             </div>
 
             <div className="flex flex-wrap gap-2">
