@@ -37,7 +37,7 @@ const Index = () => {
       <section className="relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h1 className="text-4xl lg:text-6xl font-bold text-primary">
+            <h1 className="text-4xl lg:text-6xl font-black text-title-black font-styrene">
               FinSight
             </h1>
             
@@ -66,7 +66,7 @@ const Index = () => {
         />
 
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">
+          <h2 className="text-2xl font-bold text-title-black font-styrene">
             Recent Meetings 
             <Badge variant="secondary" className="ml-2">
               {filteredMeetings.length}

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, Users, FileText, TrendingUp, Play } from 'lucide-react';
+import { Clock, Users, FileText, TrendingUp, Play, Building2, DollarSign, Phone } from 'lucide-react';
 import { Meeting } from '@/types/Meeting';
 
 interface MeetingCardProps {
@@ -23,17 +23,40 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
     }
   };
 
+  const getThumbnailIcon = (tags: Meeting['tags']) => {
+    const hasStock = tags.some(tag => tag.category.toLowerCase() === 'stock');
+    const hasIndustry = tags.some(tag => tag.category.toLowerCase() === 'industry');
+    const hasContact = tags.some(tag => tag.category.toLowerCase() === 'contact');
+
+    if (hasStock) return DollarSign;
+    if (hasIndustry) return Building2;
+    if (hasContact) return Phone;
+    return FileText;
+  };
+
+  const ThumbnailIcon = getThumbnailIcon(meeting.tags);
+
   return (
     <Card 
       className="hover:shadow-elevated transition-all duration-300 cursor-pointer group border-border/50 bg-card/50 backdrop-blur-sm"
       onClick={onClick}
     >
       <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="space-y-2">
-            <h3 className="font-semibold text-lg group-hover:text-primary transition-colors">
-              {meeting.title}
-            </h3>
+        <div className="flex items-start space-x-4">
+          {/* Minimal Thumbnail */}
+          <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+            <ThumbnailIcon className="h-6 w-6 text-primary" />
+          </div>
+          
+          <div className="flex-1 space-y-2">
+            <div className="flex items-start justify-between">
+              <h3 className="font-bold text-lg text-title-black font-styrene leading-tight">
+                {meeting.title}
+              </h3>
+              <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity ml-2">
+                <Play className="h-4 w-4" />
+              </Button>
+            </div>
             <div className="flex items-center space-x-4 text-sm text-muted-foreground">
               <div className="flex items-center space-x-1">
                 <Clock className="h-4 w-4" />
@@ -45,9 +68,6 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
               </div>
             </div>
           </div>
-          <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity">
-            <Play className="h-4 w-4" />
-          </Button>
         </div>
       </CardHeader>
 
@@ -61,7 +81,7 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
         </div>
 
         <div className="space-y-2">
-          <h4 className="font-medium text-sm">Key Insights:</h4>
+          <h4 className="font-semibold text-sm text-title-black">Key Insights:</h4>
           <ul className="space-y-1 text-sm text-muted-foreground">
             {meeting.keyInsights.slice(0, 2).map((insight, index) => (
               <li key={index} className="flex items-start space-x-2">
