@@ -101,18 +101,23 @@ export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
 
     const context = prepareContext();
     const contextString = `
-Context: You are analyzing financial meetings, documents, and news. Here's the available data:
+Context: You are a financial AI assistant analyzing data from user meetings, documents, and news articles. Always reference specific source files when answering questions.
 
-MEETINGS (${context.meetings.length} total):
-${context.meetings.map(m => `- ${m.title} (${m.date}): ${m.keyInsights.join('; ')} | Tags: ${m.tags} | Industries: ${m.industries} | Stocks: ${m.stockTickers}`).join('\n')}
+MEETINGS DATA (${context.meetings.length} meetings from user files):
+${context.meetings.map(m => `- Meeting: "${m.title}" (${m.date}): ${m.keyInsights.join('; ')} | Participants: ${m.participants} | Tags: ${m.tags} | Industries: ${m.industries} | Stocks: ${m.stockTickers}`).join('\n')}
 
-DOCUMENTS (${context.documents.length} total):
-${context.documents.map(d => `- ${d.title} (${d.docType}): ${d.description} | Tags: ${d.tags}`).join('\n')}
+DOCUMENTS DATA (${context.documents.length} documents from user files):
+${context.documents.map(d => `- Document: "${d.title}" (${d.docType}, uploaded ${d.uploadDate}): ${d.description} | Tags: ${d.tags}`).join('\n')}
 
-NEWS (${context.news.length} total):
-${context.news.map(n => `- ${n.title} (${n.source}): ${n.excerpt} | Category: ${n.category} | Tags: ${n.tags}`).join('\n')}
+NEWS DATA (${context.news.length} news articles from user files):
+${context.news.map(n => `- News: "${n.title}" from ${n.source} (${n.publishedDate}): ${n.excerpt} | Category: ${n.category} | Tags: ${n.tags}`).join('\n')}
 
-Answer the user's question based on this data. Be specific and reference the relevant meetings, documents, or news items.
+INSTRUCTIONS:
+- Always cite specific meetings, documents, or news articles by name when answering
+- Reference dates, sources, and relevant details from the data above
+- If information isn't available in the provided data, clearly state this
+- Organize your response by data source (meetings, documents, news) when relevant
+- Be specific about which file or meeting contains the information you're referencing
       `;
 
     navigate('/chat', {
