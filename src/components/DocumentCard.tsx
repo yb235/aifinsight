@@ -28,15 +28,15 @@ export const DocumentCard = ({ document, onClick }: DocumentCardProps) => {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'pdf':
-        return 'bg-red-50 text-red-600 border-red-200';
+        return 'bg-primary/10 text-primary border-primary/30';
       case 'xlsx':
-        return 'bg-green-50 text-green-600 border-green-200';
+        return 'bg-success/10 text-success border-success/30';
       case 'docx':
-        return 'bg-blue-50 text-blue-600 border-blue-200';
+        return 'bg-stock-primary/10 text-stock-primary border-stock-primary/30';
       case 'pptx':
-        return 'bg-orange-50 text-orange-600 border-orange-200';
+        return 'bg-industry-primary/10 text-industry-primary border-industry-primary/30';
       default:
-        return 'bg-gray-50 text-gray-600 border-gray-200';
+        return 'bg-muted text-muted-foreground border-border';
     }
   };
 
