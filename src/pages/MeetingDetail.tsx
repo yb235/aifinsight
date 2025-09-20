@@ -113,7 +113,7 @@ const MeetingDetail = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
+                    <CardTitle className="flex items-center gap-2 text-title-black">
                       <TrendingUp className="h-5 w-5" />
                       Key Insights
                     </CardTitle>
@@ -133,7 +133,7 @@ const MeetingDetail = () => {
                 {meeting.overview?.actionItems && (
                   <Card>
                     <CardHeader>
-                      <CardTitle>Action Items</CardTitle>
+                      <CardTitle className="text-title-black">Action Items</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2">
@@ -152,7 +152,7 @@ const MeetingDetail = () => {
               <div className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Participants</CardTitle>
+                    <CardTitle className="text-title-black">Participants</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
@@ -175,7 +175,7 @@ const MeetingDetail = () => {
                 {meeting.stockTickers && meeting.stockTickers.length > 0 && (
                   <Card>
                     <CardHeader>
-                      <CardTitle>Stocks Discussed</CardTitle>
+                      <CardTitle className="text-title-black">Stocks Discussed</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
@@ -192,7 +192,7 @@ const MeetingDetail = () => {
                 {meeting.industries && meeting.industries.length > 0 && (
                   <Card>
                     <CardHeader>
-                      <CardTitle>Industries</CardTitle>
+                      <CardTitle className="text-title-black">Industries</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
@@ -213,7 +213,7 @@ const MeetingDetail = () => {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>Meeting Transcript</CardTitle>
+                  <CardTitle className="text-title-black">Meeting Transcript</CardTitle>
                   <Button variant="outline" onClick={() => setIsPlaying(!isPlaying)}>
                     {isPlaying ? <Pause className="h-4 w-4 mr-2" /> : <Play className="h-4 w-4 mr-2" />}
                     {isPlaying ? 'Pause' : 'Play'}
