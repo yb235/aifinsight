@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header } from '@/components/Header';
 import { SearchFilters } from '@/components/SearchFilters';
 import { MeetingCard } from '@/components/MeetingCard';
 import { mockMeetings } from '@/data/mockMeetings';
@@ -34,8 +33,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
-      
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 py-12">
@@ -125,32 +122,6 @@ const Index = () => {
                   <Plus className="h-4 w-4 mr-2" />
                   Manual Entry
                 </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border/50 bg-card/30 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>Top Categories</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Technology</span>
-                    <Badge variant="secondary">42</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Healthcare</span>
-                    <Badge variant="secondary">28</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Energy</span>
-                    <Badge variant="secondary">19</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Financial Services</span>
-                    <Badge variant="secondary">15</Badge>
-                  </div>
-                </div>
               </CardContent>
             </Card>
 
