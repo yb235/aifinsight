@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Clock, Users, FileText, TrendingUp, Play, Building2, DollarSign, Phone } from 'lucide-react';
+import { Clock, Users, FileText, TrendingUp, Play, Building2, DollarSign, Phone, Cpu, Heart, Car, Landmark, Fuel, Microchip } from 'lucide-react';
 import { Meeting } from '@/types/Meeting';
 
 interface MeetingCardProps {
@@ -23,10 +23,20 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
     }
   };
 
-  const getThumbnailIcon = (tags: Meeting['tags']) => {
-    const hasStock = tags.some(tag => tag.category.toLowerCase() === 'stock');
-    const hasIndustry = tags.some(tag => tag.category.toLowerCase() === 'industry');
-    const hasContact = tags.some(tag => tag.category.toLowerCase() === 'contact');
+  const getTitleSpecificIcon = (title: string) => {
+    const titleLower = title.toLowerCase();
+    
+    if (titleLower.includes('nvidia') || titleLower.includes('ai')) return Cpu;
+    if (titleLower.includes('healthcare') || titleLower.includes('biotech')) return Heart;
+    if (titleLower.includes('tesla') || titleLower.includes('cybertruck') || titleLower.includes('automotive')) return Car;
+    if (titleLower.includes('federal reserve') || titleLower.includes('fed') || titleLower.includes('policy')) return Landmark;
+    if (titleLower.includes('oil') || titleLower.includes('gas') || titleLower.includes('energy')) return Fuel;
+    if (titleLower.includes('intel') || titleLower.includes('semiconductor') || titleLower.includes('foundry')) return Microchip;
+    
+    // Fallback to category-based icons
+    const hasStock = meeting.tags.some(tag => tag.category.toLowerCase() === 'stock');
+    const hasIndustry = meeting.tags.some(tag => tag.category.toLowerCase() === 'industry');
+    const hasContact = meeting.tags.some(tag => tag.category.toLowerCase() === 'contact');
 
     if (hasStock) return DollarSign;
     if (hasIndustry) return Building2;
@@ -34,7 +44,7 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
     return FileText;
   };
 
-  const ThumbnailIcon = getThumbnailIcon(meeting.tags);
+  const ThumbnailIcon = getTitleSpecificIcon(meeting.title);
 
   return (
     <Card 
