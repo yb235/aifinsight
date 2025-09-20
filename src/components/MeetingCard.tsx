@@ -54,7 +54,7 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
       <CardHeader className="pb-3">
         <div className="flex items-start space-x-4">
           {/* Minimal Thumbnail */}
-          <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+          <div className="flex-shrink-0 w-12 h-12 bg-secondary rounded-lg flex items-center justify-center border border-border">
             <ThumbnailIcon className="h-6 w-6 text-primary" />
           </div>
           

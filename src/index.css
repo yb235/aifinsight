@@ -8,51 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Claude AI Clean White Theme */
+    /* Claude AI Brand Colors */
     --background: 0 0% 100%;
-    --foreground: 25 95% 53%;
+    --foreground: 14 55% 49%; /* Crail */
     --title-black: 0 0% 0%;
 
     --card: 0 0% 100%;
-    --card-foreground: 25 95% 53%;
+    --card-foreground: 14 55% 49%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 25 95% 53%;
+    --popover-foreground: 14 55% 49%;
 
-    --primary: 25 95% 53%;
+    --primary: 14 55% 49%; /* Crail #C15F3C */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 25 20% 95%;
-    --secondary-foreground: 25 95% 53%;
+    --secondary: 44 17% 95%; /* Pampas #F4F3EE */
+    --secondary-foreground: 14 55% 49%;
 
-    --muted: 25 20% 95%;
-    --muted-foreground: 25 30% 40%;
+    --muted: 44 17% 95%; /* Pampas */
+    --muted-foreground: 32 7% 67%; /* Cloudy #B1ADA1 */
 
-    --accent: 25 20% 95%;
-    --accent-foreground: 25 95% 53%;
+    --accent: 44 17% 95%; /* Pampas */
+    --accent-foreground: 14 55% 49%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 25 20% 90%;
-    --input: 25 20% 95%;
-    --ring: 25 95% 53%;
+    --border: 32 7% 67%; /* Cloudy */
+    --input: 44 17% 95%; /* Pampas */
+    --ring: 14 55% 49%; /* Crail */
 
-    /* Orange Data Colors - No gradients */
-    --stock-primary: 25 95% 53%;
-    --stock-secondary: 30 100% 60%;
-    --industry-primary: 20 90% 50%;
-    --industry-secondary: 35 85% 55%;
-    --contact-primary: 15 100% 55%;
-    --contact-secondary: 40 90% 60%;
+    /* Claude Brand Data Colors */
+    --stock-primary: 14 55% 49%; /* Crail */
+    --stock-secondary: 14 60% 55%;
+    --industry-primary: 32 7% 67%; /* Cloudy */
+    --industry-secondary: 32 10% 70%;
+    --contact-primary: 14 45% 40%;
+    --contact-secondary: 14 50% 45%;
     
     /* Status Colors */
-    --success: 25 95% 53%;
-    --warning: 25 95% 53%;
+    --success: 14 55% 49%;
+    --warning: 14 55% 49%;
     --error: 0 84% 60%;
     
-    /* Shadows - No gradients */
-    --shadow-glow: 0 0 20px hsl(var(--primary) / 0.15);
+    /* Shadows - Clean and minimal */
+    --shadow-glow: 0 0 20px hsl(14 55% 49% / 0.15);
     --shadow-card: 0 4px 24px hsl(0 0% 0% / 0.05);
     --shadow-elevated: 0 8px 40px hsl(0 0% 0% / 0.1);
 
