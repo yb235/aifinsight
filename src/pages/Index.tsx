@@ -84,7 +84,7 @@ const Index = () => {
             <TabsList className="grid w-auto grid-cols-3">
               <TabsTrigger value="meetings" className="flex items-center gap-2">
                 <TrendingUp className="h-4 w-4" />
-                Recent Meetings
+                Meetings
                 <Badge variant="secondary" className="ml-1">
                   {filteredMeetings.length}
                 </Badge>
