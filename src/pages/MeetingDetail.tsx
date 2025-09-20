@@ -102,7 +102,7 @@ const MeetingDetail = () => {
               <div className="lg:col-span-2 space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Meeting Summary</CardTitle>
+                    <CardTitle className="text-title-black">Meeting Summary</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed">
