@@ -19,7 +19,7 @@ const API_PROVIDERS = {
     name: 'Groq',
     endpoint: 'https://api.groq.com/openai/v1/chat/completions',
     model: 'llama-3.1-70b-versatile',
-    defaultKey: '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',
+    defaultKey: '',
     keyUrl: 'https://console.groq.com/keys',
     description: 'Fast and free (100 requests/hour)',
   },
@@ -45,8 +45,8 @@ export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [provider, setProvider] = useState<keyof typeof API_PROVIDERS>('groq');
-  const [apiKey, setApiKey] = useState(API_PROVIDERS.groq.defaultKey);
-  const [showApiKey, setShowApiKey] = useState(false);
+  const [apiKey, setApiKey] = useState('');
+  const [showApiKey, setShowApiKey] = useState(true);
 
   const prepareContext = () => {
     const meetingsContext = mockMeetings.map(meeting => ({
@@ -88,8 +88,8 @@ export const AIQueryBox = ({ className = '' }: AIQueryBoxProps) => {
 
   const handleProviderChange = (newProvider: keyof typeof API_PROVIDERS) => {
     setProvider(newProvider);
-    setApiKey(API_PROVIDERS[newProvider].defaultKey);
-    setShowApiKey(!API_PROVIDERS[newProvider].defaultKey);
+    setApiKey('');
+    setShowApiKey(true);
   };
 
   const handleQuery = () => {
@@ -173,7 +173,7 @@ Answer the user's question based on this data. Be specific and reference the rel
           </div>
         )}
         
-        {(showApiKey || !API_PROVIDERS[provider].defaultKey) && (
+        {showApiKey && (
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Key className="h-4 w-4 text-muted-foreground" />

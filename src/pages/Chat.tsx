@@ -34,7 +34,7 @@ const Chat = () => {
     groq: {
       endpoint: 'https://api.groq.com/openai/v1/chat/completions',
       model: 'llama-3.1-70b-versatile',
-      defaultKey: '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',
+      defaultKey: '',
       keyUrl: 'https://console.groq.com/keys'
     },
     openai: {
