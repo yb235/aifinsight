@@ -78,42 +78,64 @@ const Chat = () => {
     setIsLoading(true);
     
     try {
-      const provider = API_PROVIDERS[state.provider as keyof typeof API_PROVIDERS];
-      
-      const requestBody = {
+      const providerKey = state.provider as keyof typeof API_PROVIDERS;
+      const provider = API_PROVIDERS[providerKey];
+
+      // Build a provider-aware request body
+      const baseBody: any = {
         model: provider.model,
         messages: [
-          {
-            role: 'system',
-            content: state.context
-          },
-          {
-            role: 'user',
-            content: query
-          }
+          { role: 'system', content: state.context },
+          { role: 'user', content: query }
         ],
         temperature: 0.2,
         max_tokens: 1000,
       };
+
+      // Perplexity requires/additionally supports some fields; including them reduces 400s
+      if (providerKey === 'perplexity') {
+        Object.assign(baseBody, {
+          top_p: 0.9,
+          return_images: false,
+          return_related_questions: false,
+          search_domain_filter: undefined,
+          search_recency_filter: 'month',
+          frequency_penalty: 1,
+          presence_penalty: 0,
+        });
+      }
 
       const response = await fetch(provider.endpoint, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${state.apiKey}`,
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify(baseBody),
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        // Try to extract a helpful error message
+        let details = '';
+        try {
+          const errJson = await response.json();
+          details = errJson?.error?.message || JSON.stringify(errJson);
+        } catch {
+          try {
+            details = await response.text();
+          } catch {
+            // ignore
+          }
+        }
+        throw new Error(`API error ${response.status}: ${details || 'Bad Request'}`);
       }
 
       const data = await response.json();
       const assistantMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: data.choices[0]?.message?.content || 'No response received',
+        content: data.choices?.[0]?.message?.content || 'No response received',
         timestamp: new Date()
       };
 
