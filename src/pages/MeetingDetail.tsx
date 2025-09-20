@@ -64,7 +64,7 @@ const MeetingDetail = () => {
           </Button>
           
           <div className="space-y-4">
-            <h1 className="text-3xl font-bold">{meeting.title}</h1>
+            <h1 className="text-3xl font-bold text-title-black font-styrene">{meeting.title}</h1>
             
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
               <div className="flex items-center space-x-2">
