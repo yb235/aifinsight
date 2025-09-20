@@ -110,7 +110,7 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
         <div className="flex items-center justify-between pt-2 border-t border-border/30">
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
             <FileText className="h-4 w-4 flex-shrink-0" />
-            <span>{meeting.duration} min recording</span>
+            <span>{meeting.duration}</span>
           </div>
         </div>
       </CardContent>
