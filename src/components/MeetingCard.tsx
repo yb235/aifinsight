@@ -82,21 +82,26 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <div className="flex flex-wrap gap-2">
-          {meeting.tags.map((tag, index) => (
-            <Badge key={index} variant="secondary" className={getCategoryColor(tag.category)}>
+        <div className="flex flex-wrap gap-1.5 overflow-hidden">
+          {meeting.tags.slice(0, 6).map((tag, index) => (
+            <Badge key={index} variant="secondary" className={`text-xs truncate max-w-[120px] ${getCategoryColor(tag.category)}`}>
               {tag.name}
             </Badge>
           ))}
+          {meeting.tags.length > 6 && (
+            <Badge variant="secondary" className="text-xs text-muted-foreground">
+              +{meeting.tags.length - 6} more
+            </Badge>
+          )}
         </div>
 
         <div className="space-y-2">
           <h4 className="font-semibold text-sm text-title-black">Key Insights:</h4>
-          <ul className="space-y-1 text-sm text-muted-foreground">
+          <ul className="space-y-1.5 text-sm text-muted-foreground">
             {meeting.keyInsights.slice(0, 2).map((insight, index) => (
               <li key={index} className="flex items-start space-x-2">
-                <TrendingUp className="h-3 w-3 mt-1 text-primary" />
-                <span>{insight}</span>
+                <TrendingUp className="h-3 w-3 mt-1 text-primary flex-shrink-0" />
+                <span className="line-clamp-2 text-justify leading-relaxed">{insight}</span>
               </li>
             ))}
           </ul>
@@ -104,7 +109,7 @@ export const MeetingCard = ({ meeting, onClick }: MeetingCardProps) => {
 
         <div className="flex items-center justify-between pt-2 border-t border-border/30">
           <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <FileText className="h-4 w-4" />
+            <FileText className="h-4 w-4 flex-shrink-0" />
             <span>{meeting.duration} min recording</span>
           </div>
         </div>

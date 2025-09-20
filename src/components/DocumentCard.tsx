@@ -83,20 +83,25 @@ export const DocumentCard = ({ document, onClick }: DocumentCardProps) => {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <div className="flex flex-wrap gap-2">
-          {document.tags.map((tag, index) => (
-            <Badge key={index} variant="secondary" className="text-xs">
+        <div className="flex flex-wrap gap-1.5 overflow-hidden">
+          {document.tags.slice(0, 4).map((tag, index) => (
+            <Badge key={index} variant="secondary" className="text-xs truncate max-w-[100px]">
               {tag}
             </Badge>
           ))}
+          {document.tags.length > 4 && (
+            <Badge variant="secondary" className="text-xs text-muted-foreground">
+              +{document.tags.length - 4}
+            </Badge>
+          )}
         </div>
 
-        <p className="text-sm text-muted-foreground line-clamp-2">
+        <p className="text-sm text-muted-foreground line-clamp-3 text-justify leading-relaxed">
           {document.description}
         </p>
 
         <div className="flex items-center justify-between pt-2 border-t border-border/30">
-          <div className="text-xs text-muted-foreground">
+          <div className="text-xs text-muted-foreground truncate">
             Uploaded {new Date(document.uploadDate).toLocaleDateString()}
           </div>
         </div>

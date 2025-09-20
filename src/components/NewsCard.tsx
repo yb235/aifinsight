@@ -78,16 +78,21 @@ export const NewsCard = ({ newsItem, onClick }: NewsCardProps) => {
       </CardHeader>
 
       <CardContent className="space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed text-justify">
+        <p className="text-sm text-muted-foreground leading-relaxed text-justify line-clamp-4">
           {newsItem.excerpt}
         </p>
 
-        <div className="flex flex-wrap gap-2 pt-2">
-          {newsItem.tags.map((tag, index) => (
-            <Badge key={index} variant="secondary" className="text-xs">
+        <div className="flex flex-wrap gap-1.5 pt-2 overflow-hidden">
+          {newsItem.tags.slice(0, 5).map((tag, index) => (
+            <Badge key={index} variant="secondary" className="text-xs truncate max-w-[110px]">
               {tag}
             </Badge>
           ))}
+          {newsItem.tags.length > 5 && (
+            <Badge variant="secondary" className="text-xs text-muted-foreground">
+              +{newsItem.tags.length - 5}
+            </Badge>
+          )}
         </div>
       </CardContent>
     </Card>
