@@ -6,7 +6,7 @@ import { mockMeetings } from '@/data/mockMeetings';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Mic, Upload, FileText } from 'lucide-react';
+import { Plus, Mic, Upload, FileText, TrendingUp } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -37,9 +37,18 @@ const Index = () => {
       <section className="relative overflow-hidden bg-background">
         <div className="container mx-auto px-6 py-12">
           <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h1 className="text-4xl lg:text-6xl font-black text-primary font-styrene">
-              FinSight
-            </h1>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              {/* FinSight Logo Shape */}
+              <div className="relative">
+                <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shadow-lg">
+                  <TrendingUp className="h-7 w-7 text-white" strokeWidth={2.5} />
+                </div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-secondary border-2 border-white rounded-full"></div>
+              </div>
+              <h1 className="text-4xl lg:text-6xl font-black text-primary font-styrene">
+                FinSight
+              </h1>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button variant="default" size="lg">
