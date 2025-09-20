@@ -20,10 +20,11 @@ export const mockMeetings: Meeting[] = [
       'Data center revenue growth accelerating beyond expectations',
       'Gaming segment showing signs of recovery in Q4',
       'Supply chain constraints improving but still present',
-      'AI chip demand creating unprecedented backlog'
+      'AI chip demand creating unprecedented backlog',
+      'Intel losing market share in data center processors to AMD'
     ],
     status: 'processed',
-    stockTickers: ['NVDA'],
+    stockTickers: ['NVDA', 'INTC'],
     industries: ['Semiconductors', 'Technology']
   },
   {
@@ -120,5 +121,31 @@ export const mockMeetings: Meeting[] = [
     ],
     status: 'processing',
     industries: ['Energy', 'Oil & Gas']
+  },
+  {
+    id: '6',
+    title: 'Intel Foundry Strategy & Semiconductor Outlook',
+    date: '2024-09-13T15:30:00Z',
+    duration: 55,
+    participants: [
+      { name: 'James', role: 'Semiconductor Analyst', company: 'Credit Suisse' },
+      { name: 'Soheil', role: 'Tech Hardware Specialist', company: 'T. Rowe Price' },
+      { name: 'Sarah', role: 'Industry Expert', company: 'McKinsey' }
+    ],
+    tags: [
+      { name: 'INTC', category: 'stock' },
+      { name: 'Semiconductors', category: 'industry' },
+      { name: 'Foundry', category: 'topic' }
+    ],
+    keyInsights: [
+      'Intel 18A process node showing promising early results',
+      'Government CHIPS Act funding providing crucial support',
+      'Competition with TSMC intensifying in advanced nodes',
+      'PC market recovery slower than anticipated',
+      'Data center losses to AMD and ARM-based chips continuing'
+    ],
+    status: 'processed',
+    stockTickers: ['INTC', 'TSM', 'AMD'],
+    industries: ['Semiconductors', 'Technology']
   }
 ];
